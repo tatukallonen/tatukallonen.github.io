@@ -25,6 +25,59 @@
 
     <!-- Custom styles for this template -->
     <link href="css/modern-business.css" rel="stylesheet">
+	
+	<!-- YouTube performance video CSS -->
+	<style>
+		.yt-video {
+		  position: relative;
+		  padding-bottom: 56.23%;
+		  height: 0;
+		  overflow: hidden;
+		  max-width: 100%;
+		  background: #000;
+		  margin: 5px;
+		}
+		.yt-video div{
+		  cursor: pointer;
+		  -webkit-transition: .6s all;
+		  -moz-transition: .6s all;
+		  transition: .6s all;
+		  display: block;
+		}
+		.yt-video div:hover span {
+			-webkit-filter: brightness(100%);
+		}
+		.yt-video div img{
+		  width: 100%;
+		  position: absolute;
+		  margin: auto;
+		  top: 0;
+		  right: 0;
+		  bottom: 0;
+		  left: 0;
+		}
+		.yt-video div span {
+		  width: 94px;
+		  height: 64px;
+		  position: absolute;
+		  background: url(https://1.bp.blogspot.com/-94QEg1Pk9tw/WGhNhfqMs-I/AAAAAAAAA1w/u3gEPfwh4hwMkWeAu-_PteMTFlSfy8pqACLcB/s1600/1483251316_5295_-_Youtube_I.png) no-repeat;
+		  background-position: 50% 50%;
+		  left: 50%;
+		  top: 50%;
+		  margin-left: -47px;
+		  margin-top: -32px;
+		  -webkit-filter: brightness(75%);
+		}
+		.yt-video iframe {
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  width: 100%;
+		  height: 100%;
+		  z-index: 100;
+		  background: transparent;
+		}
+	</style>
 
   </head>
 
@@ -120,12 +173,40 @@
         </div>
         <div class="col-lg-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+			<script type="text/javascript">
+				document.addEventListener("DOMContentLoaded",
+					function() {
+						var a, n,
+							v = document.getElementsByClassName("yt-video");
+						for (n = 0; n < v.length; n++) {
+							a = document.createElement("div");
+							a.setAttribute("data-id", v[n].dataset.id);
+							a.innerHTML = videoThumb(v[n].dataset.id);
+							a.onclick = videoIframe;
+							v[n].appendChild(a);
+						}
+					});
+					 
+					function videoThumb(id) {
+						var thumb = '<img src="https://i.ytimg.com/vi/ID/sddefault.jpg">',
+							playBtn = '<span></span>';
+						return thumb.replace("ID", id) + playBtn;
+					}
+					 
+					function videoIframe() {
+						var iframe = document.createElement("iframe");
+						iframe.setAttribute("src", "https://www.youtube.com/embed/" + this.dataset.id + "?autoplay=1");
+						iframe.setAttribute("allowfullscreen", "1");
+						iframe.setAttribute("frameborder", "0");
+						this.parentNode.replaceChild(iframe, this);
+					}
+			</script>
+			  <div class="yt-video" data-id="Mxesac55Puo"></div>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Project Two</a>
+                <a href="#">Embedded YouTube video (enhanced performance)</a>
               </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
+              <p class="card-text">YouTube video embedded to site with iframe. Video loads when user interacts with it.</p>
             </div>
           </div>
         </div>
